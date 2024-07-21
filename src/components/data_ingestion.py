@@ -1,11 +1,16 @@
 import os
 import sys
-sys.path.insert(0, '/home/brucewayne/Documents/Work_1/src')
-from src import exception
-from src import logger
-from exception import CustomException
-from logger import logging
+
+
+#sys.path.insert(0, '/home/brucewayne/Documents/Work_1/src')
+from src.components import data_transformation
+#from src import exception
+#from src import logger
+from src.exception import CustomException
+from src.logger import logging
 import pandas as pd
+from src.components.data_transformation import DataTransformConfig
+from src.components.data_transformation import DataTransform
 
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
@@ -49,5 +54,8 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data,test_data=obj.initiate_data_ingestion()
+
+    data_transformation=DataTransform()
+    data_transformation.initiate_data_transformation(train_data,test_data)
     
